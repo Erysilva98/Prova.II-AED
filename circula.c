@@ -28,7 +28,7 @@ int isVazia(struct listaDupla *lista)
     return (lista->inicial == NULL);
 }
 
-void pushLista(struct listaDupla *lista, int valor)
+void pushInicio(struct listaDupla *lista, int valor)
 {
     struct no *novo = malloc(sizeof(struct no));
 
@@ -38,7 +38,8 @@ void pushLista(struct listaDupla *lista, int valor)
     {
         novo->proximo = novo;
         novo->anterior = novo;
-        lista->inicial = NULL;
+        lista->inicial = novo;
+        printf("\n\t Sucesso! \n");
     }
     else
     {
@@ -52,16 +53,19 @@ void pushLista(struct listaDupla *lista, int valor)
         novo->anterior = aux;  
         aux->proximo = novo;   
         aux->anterior = novo;
+        printf("\n\t Sucesso! \n");
     }
 }
 
-void imprimir(struct no *no)
+void imprimir(struct listaDupla *lista)
 {
+    struct no *aux = lista->inicial;
+
     printf("\n\t Lista \n");
-    while (no)
+    while (lista)
     {
-        printf("%d ",no->valor);
-        no = no->proximo;
+        printf("%d ",aux->valor);
+        aux = aux->proximo;
     }
     printf("\n\n");
 }
@@ -69,7 +73,10 @@ void imprimir(struct no *no)
 int main()
 {
     int opc, valor, anterior;
+    struct listaDupla *lista;
     struct no *removido, *buscando;
+
+    initLista(lista);
 
     do
     {
@@ -91,7 +98,12 @@ int main()
         {
         case 1:
             printf("\n\n\tAdicionando Registros no Inicio da Lista");
-           
+            valor = 9;
+            pushInicio(&lista, valor);
+            valor = 1;
+            pushInicio(&lista, valor);
+            valor = 5;
+            pushInicio(&lista, valor);
             break;
 
         case 2:
@@ -143,7 +155,7 @@ int main()
             break;
 
         case 6:
-           
+            imprimir(lista);
             break;;
 
         case 7:
