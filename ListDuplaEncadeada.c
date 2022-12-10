@@ -1,3 +1,16 @@
+/*
+    -- Implementação de um Lista Duplamente Encadeada 
+    -- Metódos:
+        Inserir no Inicio, 
+        Inserir no Fim, 
+        Inserir no Meio, 
+        Inserir Ordenado, 
+        Remover da Lista,
+        Imprimir.
+    -- Autor: Erimilson Silva
+    -- 09/12/2022
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 
