@@ -74,24 +74,6 @@ cLista *iniciarLista()
     return lista;
 }
 
-void removeLista(cLista **ref_lista)
-{
-    cLista *lista = *ref_lista;
-    
-    No *p = lista->inicio;
-    No *aux = NULL;
-
-    while(p != lista->final)
-    {
-        aux = p;
-        p = p->proximo;
-        free(aux);
-    }
-    free(p);
-    free(lista);
-    *ref_lista = NULL;
-}
-
 int isVazia(cLista *lista)
 {
     return (lista->tam == 0);
@@ -121,24 +103,6 @@ void addLista(cLista *lista, Reg cad)
     lista->tam++;
 }
 
-void removerLista(cLista **ref_lista)
-{
-    cLista *lista = *ref_lista;
-    
-    No *p = lista->inicio;
-    No *aux = NULL;
-
-    while(p != lista->final)
-    {
-        aux = p;
-        p = p->proximo;
-        free(aux);
-    }
-    free(p);
-    free(lista);
-    *ref_lista = NULL;
-}
-
 void imprimir(cLista *lista)
 {
     if(isVazia(lista))
@@ -157,8 +121,7 @@ void imprimir(cLista *lista)
             printf("\n\tIdade: %2d",novo->cadastro.idade);
             printf("\n\tMatricula: %s",novo->cadastro.matricula);
             printf("\n\tCurso: %2d",novo->cadastro.curso);
-            printf("\n\tPeriodo: %2d",novo->cadastro.periodo);
-            
+            printf("\n\tPeriodo: %2d",novo->cadastro.periodo);          
             novo = novo->proximo;
         }
         while(novo != lista->inicio);
@@ -166,12 +129,92 @@ void imprimir(cLista *lista)
     printf("\n\n\tNumero de Registros: %lu\n\n",lista->tam);
 }
 
+int removeLista(cLista *lista, int ch)
+{
+    if(isVazia(lista))
+    {
+        printf("\n\tA Lista está Vazia! \n");
+    }
+    else
+    {
+        No *aux, *prox;
+
+        if(lista->inicio)
+        {
+            aux = lista->inicio;
+            prox = aux->proximo;
+            while (prox != lista->inicio)
+            {
+                if(prox->cadastro.chave == ch)
+                {
+                    aux->proximo = prox->proximo;
+                    free(prox);
+                    lista->tam--;
+                    printf("\n\tSucesso! \n");
+                    return True;
+                }
+                else
+                {
+                    aux = prox;
+                    prox = prox->proximo;
+                }
+            }
+            if(prox->cadastro.chave == ch)
+            {
+                if(aux == prox)
+                {
+                    lista->inicio = NULL;
+                }
+                else
+                {
+                    aux->proximo = prox->proximo;
+                    lista->inicio = prox->proximo;
+                }
+                free(prox);
+                lista->tam--;
+                printf("\n\tSucesso! \n");
+                return True;
+            }                
+        }
+    }
+    printf("\n\tRegistro não Encontrado! \n");
+    return False;
+}
+
+void resetaNo(cLista *lista)
+{
+    if(isVazia(lista))
+    {
+        printf("\n\tA Lista está Vazia! \n");
+    }
+    else
+    {
+        No *novo = lista->inicio;
+        printf("\n\t    Registros \n");
+        do
+        {
+            novo->cadastro.chave = -1;
+            novo->cadastro.nome = NULL;
+            novo->cadastro.idade = -1;
+            novo->cadastro.matricula = NULL;
+            novo->cadastro.curso = -1;
+            novo->cadastro.periodo = -1;
+        }
+        while(novo != lista->inicio);
+        novo->anterior = NULL;
+        novo->proximo = NULL;
+        lista->tam = 0;
+    }
+    printf("\n\n\tRegistros: %lu\n\n",lista->tam);
+    printf("\n\tSucesso Registros Deletados! ");
+}
+
 int main()
 {
-    int opc, anterior, cod;
+    int opc, anterior, ch;
     No *removido, *buscando;
     Reg r1, r2, r3, r4, r5;
-    cLista **ch, *lista = iniciarLista();
+    cLista *lista = iniciarLista();
 
     do
     {
@@ -181,7 +224,7 @@ int main()
         printf("\n\t 2 - IMPRIMIR");
         printf("\n\t 3 - REMOVER");
         printf("\n\t 4 - LIMPAR");
-        printf("\n\tOpcao: ");
+        printf("\n\n\tOpcao: ");
 
         scanf("%d",&opc);
 
@@ -189,14 +232,14 @@ int main()
         {
         case 1:
             printf("\n\n\tAdicionando Registros no Inicio da Lista \n");
-            r1.chave = 01;
+            r1.chave = 1;
             r1.nome = "Erimilson Silva";
             r1.idade = 23;
             r1.matricula = "2022-AEB";
             r1.curso = 3;
             r1.periodo = 2;
 
-            r2.chave = 07;
+            r2.chave = 7;
             r2.nome = "Lídia Silva";
             r2.idade = 21;
             r2.matricula = "2022-AEB";
@@ -222,16 +265,14 @@ int main()
         
         case 3:
             printf("\n\n\tRemovendo Registros da Lista");
-            printf("\n\t Informe a Chave do Registro a ser Removido da Lista: ");
-            scanf("%d",&cod);
-
-            // removerLista(ch);
-           
+            printf("\n\n\t A Chave a ser Removido da Lista = 3 ");    
+            ch = 3;
+            removeLista(lista,ch); 
             break;
 
         case 4:
             printf("\n\tLimpando os Registros \n");
-            // limpaLista(lista);
+            resetaNo(lista);
             break;
 
         default:
