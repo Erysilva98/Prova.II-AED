@@ -41,11 +41,11 @@ void pushInicio(No **lista, int num)
             (*lista)->anterior = novo; 
         }
         *lista = novo;
-        printf("\n\t Sucesso! \n");
+        printf("\n Sucesso! \n");
     }
     else
     {
-        printf("\nErro ao Alocar Memoria! \n");
+        printf("\n Erro ao Alocar Memoria! \n");
     }    
 }
 
@@ -74,7 +74,7 @@ void pushFim(No **lista, int num)
             aux->proximo = novo;
             novo->anterior = aux;
         }
-        printf("\n\t Sucesso! \n");
+        printf("\n Sucesso! \n");
     }
     else
     {
@@ -114,7 +114,7 @@ void pushMeio(No **lista, int num, int ant)
             novo->anterior = aux;
             aux->proximo = novo;
         }
-        printf("\n\t Sucesso! \n");
+        printf("\n Sucesso! \n");
     }
     else
     {
@@ -162,7 +162,7 @@ void pushOrdenado(No **lista, int num)
             aux->proximo = novo;
             
         }
-        printf("\n\t Sucesso! \n");
+        printf("\n Sucesso! \n");
     }
     else
     {
@@ -226,13 +226,13 @@ No* buscar(No **lista, int num)
 
 void imprimir(No *no)
 {
-    printf("\n\t Lista \n");
+    printf("\n Lista -> ");
     while (no)
     {
         printf("%d ",no->valor);
         no = no->proximo;
     }
-    printf("\n\n");
+    printf("\n");
 }
 
 No* ultimo(No **lista)
@@ -247,13 +247,13 @@ No* ultimo(No **lista)
 
 void imprimirInverso(No *no)
 {
-    printf("\n\t Lista \n");
+    printf("\n Lista -> ");
     while (no)
     {
         printf("%d ",no->valor);
         no = no->anterior;
     }
-    printf("\n\n");
+    printf("\n");
     
 }
 
@@ -264,7 +264,7 @@ int main()
 
     do
     {
-        printf("\n\t MENU ");
+        printf("\n\t-----MENU-----");
         printf("\n\t 0 - SAIR ");
         printf("\n\t 1 - ADICIONAR NO INICIO");
         printf("\n\t 2 - ADICIONAR NO FINAL");
@@ -274,70 +274,82 @@ int main()
         printf("\n\t 6 - IMPRIMIR LISTA ");
         printf("\n\t 7 - BUSCAR NA LISTA ");
         printf("\n\t 8 - IMPRIMIR LISTA INVERSA ");
-        printf("\n\tOpcao: ");
+        printf("\n\n\tOpcao: ");
 
         scanf("%d",&opc);
 
         switch (opc)
         {
         case 1:
-            printf("\n\n\tAdicionando Registros no Inicio da Lista");
+            printf("\n\tAdicionando Registros no Inicio da Lista \n");
             valor = 9;
             pushInicio(&lista, valor);
             valor = 1;
             pushInicio(&lista, valor);
             valor = 5;
             pushInicio(&lista, valor);
+            valor = 3;
+            pushInicio(&lista, valor);
+            valor = 8;
+            pushInicio(&lista, valor);
             break;
 
         case 2:
-            printf("\n\n\tAdicionando Registros no Final da Lista");
+            printf("\n\tAdicionando Registros no Final da Lista \n");
             valor = 71;
             pushFim(&lista, valor);
             valor = 100;
             pushFim(&lista, valor);
+            valor = 90;
+            pushFim(&lista, valor);
+            valor = 87;
+            pushFim(&lista, valor);
+            valor = 66;
+            pushFim(&lista, valor);
             break;
         
         case 3:
-            printf("\n\n\tAdicionando Registros no Meio da Lista");
+            printf("\n\tAdicionando Registros no Meio da Lista \n");
             imprimir(lista);
             printf("\n\t Informe a Referencia da Lista para Adiciona: ");
             scanf("%d",&anterior);
             
             if(anterior)
             {
-                valor = 12;
+                valor = 54;
                 pushMeio(&lista, valor, anterior);
             }
             else
             {
-                printf("\n\tErro, nenhuma Referencia! \n");
+                printf("\nErro, nenhuma Referencia! \n");
             }
 
             break;
         
         case 4:
-            printf("\n\n\tAdicionando Registros Ordenado na Lista");
-            valor = 30;
+            printf("\n\tAdicionando Registros Ordenado na Lista \n");
+            valor = 10;
+            pushOrdenado(&lista, valor);
+            valor = 20;
             pushOrdenado(&lista, valor);
             break;
 
         case 5:
-            printf("\n\n\tRemovendo Registros da Lista");
             imprimir(lista);
-            printf("\n\t Informe o Registro a ser Removido da Lista: ");
+            printf("\n\tRemovendo Registros da Lista ");
+            printf("\n\tInforme um valor da Lista: ");
             scanf("%d",&valor);
             
             removido = popLista(&lista, valor);
 
             if(removido)
             {
-                printf("\n\tRegistro Removido: %d\n",removido->valor);
+                printf("\nRegistro Removido: %d\n",removido->valor);
                 free(removido);
             }
             else
             {
-                printf("\n\tErro, Registro Inexistente! \n");
+                printf("\nErro, Registro Inexistente! \n");
             }
             break;
 
@@ -353,11 +365,11 @@ int main()
 
             if(buscando)
             {
-                printf("\n\tRegistro Encontrado: %d\n",buscando->valor);
+                printf("\nRegistro Encontrado: %d\n",buscando->valor);
             }
             else
             {
-                printf("\n\tRegistro nao Encontrado! \n");
+                printf("\nRegistro nao Encontrado! \n");
             }
             break;
 
