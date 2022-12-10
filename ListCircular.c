@@ -211,8 +211,7 @@ void resetaLista(cLista *lista)
 
 int main()
 {
-    int opc, anterior, ch;
-    No *removido, *buscando;
+    int opc, ch;
     Reg r1, r2, r3, r4, r5;
     cLista *lista = initLista();
 
@@ -272,7 +271,6 @@ int main()
             addLista(lista,r5); 
             addLista(lista,r2); // Esse será o Último
             addLista(lista,r3); // Teste de Remover
-            
             
             break;
 
