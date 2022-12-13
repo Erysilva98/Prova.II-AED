@@ -34,7 +34,7 @@ No *initArvB()
 {
     No *no = malloc(sizeof(No));
 
-    no->cadastro.chave = NULL;
+    no->cadastro.chave = 0;
     
     no->esquerda = NULL;
     no->direita = NULL;
@@ -42,7 +42,7 @@ No *initArvB()
     return no;
 }
 
-ArvB inserir(ArvB arv, No *no)
+ArvB inserir(ArvB arv, Reg *no)
 {
     No *f, *p;
 
@@ -52,7 +52,7 @@ ArvB inserir(ArvB arv, No *no)
     while (f != NULL)
     {
         p = f;
-        if(f->cadastro.chave > no->cadastro.chave)
+        if(f->cadastro.chave > no->chave)
         {
             f = f->esquerda;
         }
@@ -61,7 +61,7 @@ ArvB inserir(ArvB arv, No *no)
             f = f->direita;
         }
     }
-    if(p->cadastro.chave > no->cadastro.chave)
+    if(p->cadastro.chave > no->chave)
     {
         p->esquerda = no;
     }
@@ -72,7 +72,7 @@ ArvB inserir(ArvB arv, No *no)
     return arv;
 }
 
-ArvB *removerNo(ArvB arv)
+No *removerNo(ArvB arv)
 {
     No *p, *q;
     if(arv->esquerda == NULL)
@@ -135,8 +135,8 @@ void imprimir(ArvB arv)
 int main()
 {
     int opc, ch;
-    Reg r1, r2, r3, r4, r5;
-    ArvB *arv = initArvB();
+    No *arv = initArvB();
+    Reg *r1, *r2, *r3, *r4, *r5;
 
     do
     {
@@ -153,21 +153,22 @@ int main()
         {
         case 1:
             printf("\n\n\tAdicionando Registros no Inicio da Lista \n");
-            r1.chave = 01;
+            
+            r1->chave = 01;
 
-            r2.chave = 02;
+            r2->chave = 02;
 
-            r3.chave = 03;
+            r3->chave = 03;
 
-            r4.chave = 04;
+            r4->chave = 04;
 
-            r5.chave = 05;
+            r5->chave = 05;
 
-            addLista(arv,r1); 
-            addLista(arv,r2); 
-            addLista(arv,r3); 
-            addLista(arv,r4); 
-            addLista(arv,r5); 
+            inserir(arv,r1); 
+            inserir(arv,r2); 
+            inserir(arv,r3); 
+            inserir(arv,r4); 
+            inserir(arv,r5); 
             
             break;
 

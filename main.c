@@ -1,13 +1,12 @@
 /*
     -- Implementação de Árvore de Buscar Binária
     -- Metódos:
-        Buscar,
         Inserção,
+        Impressão em Ordenada,
         Remoção.
     -- Autor: Erimilson Silva
-    -- 12/12/2022
+    -- 16/12/2022
 */
-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -16,127 +15,111 @@
 
 typedef int Tip_Chave;
 
-typedef struct //Registro
+typedef struct // Registros 
 {
     Tip_Chave chave;
+    char *nome;
+    int idade;
+    char *matricula;
+    int curso;
+    int periodo;
 }Reg;
 
 typedef struct no
 {
     Reg cadastro;
-    struct no *esquerda;
-    struct no *direita;
+    struct no *dereita, *esquerda;    
 }No;
 
-typedef struct // Árvore Binária
+No *initLista()
 {
-    No *raiz;
-}ArvB;
+    No *arv = malloc(sizeof(No));
+
+    arv->cadastro.chave = 0;
+    
+    arv->esquerda = NULL;
+    arv->dereita = NULL;
+
+    return arv;
+}
 
 No *criarNo(Reg cad)
 {
-    No *no = malloc(sizeof(No));
+    No *no = malloc (sizeof(No));
 
     no->cadastro.chave = cad.chave;
+    no->cadastro.nome = cad.nome;
+    no->cadastro.idade = cad.idade;
+    no->cadastro.matricula = cad.matricula;
+    no->cadastro.curso = cad.curso;
+    no->cadastro.periodo = cad.periodo;
 
-    no->direita = NULL;
     no->esquerda = NULL;
+    no->dereita = NULL;
 
     return no;
 }
 
-// Funções Recursiva
-void addEsquerda(No *no, Reg cad);
-void addDireita(No *no, Reg cad);
-
-int arvoreVazia(ArvB *no)
+No *inserir(No *raiz, Reg cad)
 {
-    return (no->raiz == NULL);
-}
-
-void addEsquerda(No *no, Reg cad)
-{
-    if(no->esquerda == NULL)
+    if(raiz == NULL)
     {
-        No *novo = criarNo(cad);
-        novo->esquerda = novo;
-        printf("\n\tSucesso!");
+        criarNo(cad);
     }
     else
     {
-        if(cad.chave < no->esquerda->cadastro.chave);
+        if(cad.chave < raiz->cadastro.chave)
         {
-            addEsquerda(no->esquerda, cad);
+            raiz->esquerda = inserir(raiz->esquerda, cad);
         }
-        if(cad.chave > no->esquerda->cadastro.chave)
+        if(cad.chave > raiz->cadastro.chave)
         {
-            addDireita(no->esquerda, cad);
+            raiz->dereita = inserir(raiz->dereita, cad);
+        }
+        return raiz;
+    }
+}
+
+No *buscar(No *raiz, Reg cad)
+{
+    if(raiz)
+    {
+        if(cad.chave == raiz->cadastro.chave)
+        {
+            return raiz;
+        }
+        else if (cad.chave < raiz->cadastro.chave)
+        {
+            return buscar(raiz->esquerda, cad);
         }
         else
         {
-            printf("\n\tError!");
+            return buscar(raiz->dereita,cad);
         }
+        return NULL;        
     }
 }
 
-void addDireita(No *no, Reg cad)
+void imprimir(No *raiz)
 {
-    if(no->direita == NULL)
+    if(raiz)
     {
-        No *novo = criarNo(cad);
-        novo->direita = novo;
-        printf("\n\tSucesso!");
-    }
-    else
-    {
-        if(cad.chave > no->direita->cadastro.chave)
-        {
-            addDireita(no->direita, cad);
-        }
-        if(cad.chave < no->direita->cadastro.chave);
-        {
-            addEsquerda(no->direita, cad);
-        }
-    }
-}
-
-void AddArvore(ArvB *arv, Reg cad )
-{
-    if(arvoreVazia(arv))
-    {
-        No *novo = criarNo(cad);
-        arv->raiz = novo;
-        printf("\n\tSucesso!");
-    }
-    else
-    {
-        if(cad.chave < arv->raiz->cadastro.chave)
-        {
-            addEsquerda(arv->raiz,cad);
-        }
-        if(cad.chave > arv->raiz->cadastro.chave)
-        {
-            addDireita(arv->raiz,cad);
-        }
-    }
-}
-
-void imprimir(No *no)
-{
-    if(no != NULL)
-    {
-        imprimir(no->esquerda);
-        printf("%d ",no->cadastro.chave);
-        imprimir(no->direita);
+        imprimir(raiz->esquerda);
+        printf("\n\n\t- Registro do Aluno - %2d\t\n",raiz->cadastro.chave);
+        printf("\nNome: %s",raiz->cadastro.nome);
+        printf("\nIdade: %2d",raiz->cadastro.idade);
+        printf("\nMatricula: %s",raiz->cadastro.matricula);
+        printf("\nCurso: %2d",raiz->cadastro.curso);
+        printf("\nPeriodo: %2d",raiz->cadastro.periodo);  
+        imprimir(raiz->dereita);
     }
 }
 
 int main()
 {
-    int opc, ch;
-    Reg r1, r2, r3, r4, r5;
-    ArvB arv;
-    arv.raiz = NULL;
+    int i, opc;
+    Reg ch, r1, r2, r3, r4, r5;
+    No *pesquisar, *arv = NULL;
 
     do
     {
@@ -144,8 +127,8 @@ int main()
         printf("\n\t 0 - SAIR ");
         printf("\n\t 1 - ADICIONAR");
         printf("\n\t 2 - IMPRIMIR");
-        printf("\n\t 3 - REMOVER");
-        printf("\n\t 4 - LIMPAR");
+        printf("\n\t 3 - PESQUISAR");
+        printf("\n\t 4 - REMOVER");
         printf("\n\n\tOpcao: ");
 
         scanf("%d",&opc);
@@ -154,80 +137,77 @@ int main()
         {
         case 1:
             printf("\n\n\tAdicionando Registros no Inicio da Lista \n");
-            r1.chave = 100;
-                        /*
+
+            r1.chave = 50;
             r1.nome = "Erimilson Silva";
             r1.idade = 23;
             r1.matricula = "2022-AEB";
             r1.curso = 3;
             r1.periodo = 2;
-            */
 
-           AddArvore(&arv,r1);
-
-           r2.chave = 20;
-           /*            
+            r2.chave = 20;
             r2.nome = "Lídia Silva";
             r2.idade = 21;
             r2.matricula = "2022-AEB";
             r2.curso = 2;
             r2.periodo = 4;
-           */
 
-          AddArvore(&arv,r2); 
-
-          r3.chave = 30;
-           /*
-            
+            r3.chave = 21;
             r3.nome = "Kelly Ferraz";
             r3.idade = 21;
             r3.matricula = "2022-AEB";
             r3.curso = 1;
-            r3.periodo = 3;         
-           */
-          AddArvore(&arv,r3); 
-
-          r4.chave = 10;
-           /*
+            r3.periodo = 3;
+            
+            r4.chave = 18;
             r4.nome = "Milena Almeida";
             r4.idade = 25;
             r4.matricula = "2020-AEB";
             r4.curso = 4;
-            r4.periodo = 6;        
-           */
-
-          AddArvore(&arv,r4); 
-
-            r5.chave = 25;
-           /*
+            r4.periodo = 6;
+            
+            r5.chave = 23;
             r5.nome = "Amanda Silva";
             r5.idade = 25;
             r5.matricula = "2020-AEB";
             r5.curso = 5;
             r5.periodo = 3;
-           */            
-            AddArvore(&arv,r5); 
-            
+
+            arv = inserir(arv,r1);
+            arv = inserir(arv,r2);
+            arv = inserir(arv,r3);
+            arv = inserir(arv,r4);
+            arv = inserir(arv,r5);
+                        
             break;
 
         case 2:
             // Imprimir Registro
-            imprimir(arv.raiz);
+            imprimir(arv);
             break;
         
         case 3:
-            // Remover Registro da Lista
-           // printf("\n\nRegistro a ser Removido da Lista - %s\n",r3.nome);    
-           // ch = 3;
-           // removeLista(lista,ch); 
-            //printf("\n\nRegistro a ser Removido da Lista - %s\n",r4.nome);    
-           // ch = 4;
-           // removeLista(lista,ch);
-            break;
+            // Buscando código de Regsitros 
+            printf("\n\tDigite o Chave do Registro: ");
+            scanf("%d",&ch);
 
-        case 4:
-            // Reiniciar Lista
-           // resetaLista(lista);
+            pesquisar = buscar(arv,ch);
+
+            if(pesquisar)
+            {
+                printf("\n\t Resgitro Encontrado: %d",pesquisar->cadastro.chave);
+                printf("\nInformações: ");
+                printf("\nNome: %s",pesquisar->cadastro.nome);
+                printf("\nIdade: %2d",pesquisar->cadastro.idade);
+                printf("\nMatricula: %s",pesquisar->cadastro.matricula);
+                printf("\nCurso: %2d",pesquisar->cadastro.curso);
+                printf("\nPeriodo: %2d",pesquisar->cadastro.periodo);  
+
+            }
+            else
+            {
+                printf("\n\t Nenhum Reggistro Encontrado! \n");
+            }
             break;
 
         default:
