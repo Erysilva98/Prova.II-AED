@@ -2,8 +2,8 @@
     -- Implementação de Árvore de Buscar Binária
     -- Metódos:
         Inserção,
-        Impressão em Ordenada,
-        Altura da Arvore,
+        Impressão Ordenada,
+        Altura da Àrvore,
         Número de NOs,
         Número de Folhas,
         Remoção.
@@ -34,18 +34,6 @@ typedef struct no
     struct no *direita, *esquerda;    
 }No;
 
-No *initLista()
-{
-    No *arv = malloc(sizeof(No));
-
-    arv->cadastro.chave = 0;
-    
-    arv->esquerda = NULL;
-    arv->direita = NULL;
-
-    return arv;
-}
-
 No *criarNo(Reg cad)
 {
     No *no = malloc (sizeof(No));
@@ -67,7 +55,8 @@ No *inserir(No *raiz, Reg cad)
 {
     if(raiz == NULL)
     {
-        criarNo(cad);
+        printf("\n  Sucesso");
+        criarNo(cad);   
     }
     else
     {
@@ -107,10 +96,11 @@ No *remover(No *raiz, Reg cad)
 {
     if(raiz == NULL)
     {
-        printf("\n\tRegistro não Encontrado");
+        printf("\nRegistro não Encontrado! ");
         return NULL;
     }
-    else // Procurar NO
+    // Procurar NO
+    else 
     {
         if(raiz->cadastro.chave == cad.chave)
         {
@@ -118,23 +108,25 @@ No *remover(No *raiz, Reg cad)
             if(raiz->esquerda == NULL && raiz->direita == NULL)
             {
                 free(raiz);
-                printf("\n\tElemento Folha Removido: %d !\n",cad.chave);
+                printf("\nElemento Folha Removido: %d !\n",cad.chave);
                 return NULL;
             }
             else
             {
-                // Remover nós que possuem 2 filhos
+                // Remover Nós que possuem 2 filhos
                 No *aux;
                 if(raiz->esquerda != NULL && raiz->direita != NULL)
                 {
-                    No *aux = raiz->esquerda; // Subárvore á esquerda
+                    // Subárvore á esquerda
+                    No *aux = raiz->esquerda; 
                     while(aux->direita != NULL)
                     {
-                        aux = aux->direita; // Obtém o nó a direita
+                        // Obtém o nó a direita
+                        aux = aux->direita; 
                     }
                     raiz->cadastro.chave = aux->cadastro.chave;
                     aux->cadastro.chave = cad.chave;
-                    printf("Elemento trcoado: %d !\n",cad.chave);
+                    printf("\nElemento trocado: %d !\n",cad.chave);
                     raiz->esquerda = remover(raiz->esquerda,cad);
                     return raiz;
                 }
@@ -150,7 +142,7 @@ No *remover(No *raiz, Reg cad)
                         aux = raiz->direita;
                     }
                     free(raiz);
-                    printf("\n\tElemento com 1 Filho removido: %d !\n",cad.chave);
+                    printf("\nElemento com 1 Filho removido: %d !\n",cad.chave);
                     return aux;
                 }
             }
@@ -218,7 +210,6 @@ int numFolhas(No *raiz)
     {
         return numFolhas(raiz->esquerda) + numFolhas(raiz->direita);
     }
-    
 }
 
 void imprimir(No *raiz)
@@ -260,7 +251,7 @@ int main()
         switch (opc)
         {
         case 1:
-            printf("\n\n\tAdicionando Registros no Inicio da Lista \n");
+            printf("\n\n\t------------- Adicionado Registros na Lista ------------- \n");
 
             r1.chave = 50;
             r1.nome = "Erimilson Silva";
@@ -306,12 +297,13 @@ int main()
             break;
 
         case 2:
-            // Imprimir Registro
+            printf("\n\n\t------------- Registros da Lista ------------- \n");
             imprimir(arv);
             break;
         
         case 3:
             // Buscando código de Regsitros 
+            printf("\n\n\t------------- Pesquisar por Registros na Lista ------------- \n");
             printf("\n\tDigite o Chave do Registro: ");
             scanf("%d",&ch);
 
@@ -320,51 +312,53 @@ int main()
             if(pesquisar)
             {
                 printf("\n\t Resgitro Encontrado: %d",pesquisar->cadastro.chave);
-                printf("\nInformações: ");
+                printf("\n------------- Informacoes do Registro ------------- \n");
                 printf("\nNome: %s",pesquisar->cadastro.nome);
                 printf("\nIdade: %2d",pesquisar->cadastro.idade);
                 printf("\nMatricula: %s",pesquisar->cadastro.matricula);
                 printf("\nCurso: %2d",pesquisar->cadastro.curso);
                 printf("\nPeriodo: %2d",pesquisar->cadastro.periodo);  
-
             }
             else
             {
-                printf("\n\t Nenhum Reggistro Encontrado! \n");
+                printf("\n\n\t------------- Nenhum Registro Encontrado ------------- \n");
             }
             break;
         
         case 4:
-            printf("\n\tAltura da Arvore: %d\n", alturaArv(arv));
-
+            printf("\n\n\t------------- Altura ------------- \n");
+            printf("\nAltura da Arvore: %d\n", alturaArv(arv));
             break;
 
         case 5:
-            printf("\n\tNúmero de NOs: %d\n",numNos(arv));
-
+            printf("\n\n\t------------- Nos ------------- \n");
+            printf("\nNúmero de NOs: %d\n",numNos(arv));
             break;
         
         case 6:
+            printf("\n\n\t------------- Folhas ------------- \n");
             printf("\n\tNúmero de Folhas: %d\n",numFolhas(arv));
-
             break;    
 
         case 7:
-            printf("\t");
+            printf("\n\n\t------------- Registros ------------- \n");
+
             imprimir(arv);
-            printf("\n\tDigite a Chave do Registro a ser removida: ");
+
+            printf("\n\n\t------------- Removendo Registros ------------- \n");
+            printf("\n\tDigite a Chave do Registro a ser Removida: ");
             scanf("%d",&ch);
 
             arv = remover(arv,ch);
 
-            printf("\n\n\t Atualização de Registro: ");
+            printf("\n\n\t------------- Atualizacao do Registros ------------- \n");
             imprimir(arv);
             break;    
 
         default:
             if(opc != 0)
             {
-                printf("\n\t Opcao Invalida! \n");
+                printf("\n\n\t------------- Opcao Invalida ------------- \n");
             }
         }
     }
