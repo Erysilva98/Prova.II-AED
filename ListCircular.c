@@ -7,7 +7,7 @@
         Reinciar Lista, 
         Imprimir Lista.
     -- Autor: Erimilson Silva
-    -- 10/12/2022
+    -- 12/12/2022
 */
 
 #include <stdio.h>
