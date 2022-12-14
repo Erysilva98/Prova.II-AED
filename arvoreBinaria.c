@@ -230,7 +230,7 @@ void imprimir(No *raiz)
 int main()
 {
     int i, opc;
-    Reg ch, r1, r2, r3, r4, r5;
+    Reg ch, r1, r2, r3, r4, r5, r6, r7;
     No *pesquisar, *arv = NULL;
 
     do
@@ -288,11 +288,27 @@ int main()
             r5.curso = 5;
             r5.periodo = 3;
 
+            r6.chave = 12;
+            r6.nome = "Nathalia Souza";
+            r6.idade = 20;
+            r6.matricula = "2020-AEB";
+            r6.curso = 3;
+            r6.periodo = 3;
+
+            r7.chave = 07;
+            r7.nome = "Amanda Silva";
+            r7.idade = 18;
+            r7.matricula = "2020-AEB";
+            r7.curso = 2;
+            r7.periodo = 2;
+
             arv = inserir(arv,r1);
             arv = inserir(arv,r2);
             arv = inserir(arv,r3);
             arv = inserir(arv,r4);
             arv = inserir(arv,r5);
+            arv = inserir(arv,r6);
+            arv = inserir(arv,r7);
                         
             break;
 
