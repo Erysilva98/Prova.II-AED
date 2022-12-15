@@ -2,7 +2,6 @@
 
 #### PRÁTICAS NA LINGUAGEM C
 #
-
 ### Arvore de Registros.c
     -- Struct de Registro em Árvore de Buscar Binária
     --Métodos:
@@ -16,7 +15,6 @@
     -- Autor: Erimilson Silva
     -- 15/12/2022
 #
-
 ### Lista de Registros.c  obs: Lista Circular Duplamente Encadeda
     -- Struct de Registro em Lista Circular Duplamente Encadeda
     --Métodos:
@@ -28,7 +26,6 @@
     -- Autor: Erimilson Silva
     -- 15/12/2022
 #
-
 ### src/ Lista Duplamente Encadeada.c
     -- Implementação de um Lista Duplamente Encadeada 
     -- Métodos:
@@ -42,7 +39,6 @@
     -- Autor: Erimilson Silva
     -- 09/12/2022
 #
-
 ### src/ Lista Circular.c e Duplamente Encadeada
     -- Implementação de um Lista Circular Duplamente Encadeada
     -- Métodos:
@@ -54,7 +50,6 @@
     -- Autor: Erimilson Silva
     -- 12/12/2022
 #
-
 ### src/ Arvore de Buscar Binária.c
     -- Implementação de Árvore de Buscar Binária
     -- Métodos:
@@ -67,9 +62,11 @@
         Impressão Ordenada.
     -- 14/12/2022
 #
+<p>&copy; Copyright 2022 Erimilson Silva</p>
 <div stylr = "display: inline_block"> <br>
-    <a alt="Instagram" href="https://www.instagram.com/erimilson.silva_98/" target="_blank"> <img  align = "center" height = "25" width = "82" src = "https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" target=" _ blank "></a>
-    <a alt = "LinkedIn" href="https://www.linkedin.com/in/erimilson-silva-31493720a/" target="_blank"> <img align = "center"  height = "25" width = "82" src = "https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" target =" _ blank "> </a>
+<a alt="Instagram" href="https://www.instagram.com/erimilson.silva_98/" target="_blank"> <img  align = "center" height = "25" width = "82" src = "https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" target="_blank"></a>
+<a alt = "LinkedIn" href="https://www.linkedin.com/in/erimilson-silva-31493720a/" target="_blank"> <img align = "center"  height = "25" width = "82" src = "https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" target ="_blank"> </a>
 </div>
 
 #
+
