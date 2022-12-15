@@ -1,14 +1,15 @@
 /*
-    -- Implementação de Árvore de Buscar Binária
-    -- Metódos:
-        Inserção,
-        Impressão Ordenada,
-        Altura da Àrvore,
+    -- Struct de Registro em Árvore de Buscar Binária
+    --Métodos:
+        Método de Inserção,
+        Método de Buscar,
+        Método de Remover,
+        Altura da Árvore,
         Número de NOs,
         Número de Folhas,
-        Remoção.
+        Impressão Ordenada.
     -- Autor: Erimilson Silva
-    -- 16/12/2022
+    -- 15/12/2022
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -222,7 +223,11 @@ int numFolhas(No *raiz)
 
 void imprimir(No *raiz)
 {
-    if(raiz)
+    if(raiz == NULL)
+    {
+        printf("\n\tA Lista está Vazia! \n");
+    }
+    else
     {
         imprimir(raiz->esquerda);
         printf("\n\n\t- Registro do Aluno - %2d\t\n",raiz->cadastro.chave);
@@ -237,7 +242,7 @@ void imprimir(No *raiz)
 
 int main()
 {
-    int i, opc;
+    int opc;
     Reg ch, r1, r2, r3, r4, r5, r6, r7;
     No *pesquisar, *arv = NULL;
 
@@ -259,7 +264,7 @@ int main()
         switch (opc)
         {
         case 1:
-            printf("\n\n\t------------- Adicionado Registros na Lista ------------- \n");
+            printf("\n\n\t------------- Adicionado Registros ------------- \n");
 
             r1.chave = 50;
             r1.nome = "Erimilson Silva";
@@ -321,7 +326,7 @@ int main()
             break;
 
         case 2:
-            printf("\n\n\t------------- Registros da Lista ------------- \n");
+            printf("\n\n\t------------- Registros ------------- \n");
             imprimir(arv);
             break;
         
@@ -369,14 +374,12 @@ int main()
 
             imprimir(arv);
 
-            printf("\n\n\t------------- Removendo Registros ------------- \n");
+            printf("\n\n\t------------- Removendo Registro ------------- \n");
             printf("\n\tDigite a Chave do Registro a ser Removida: ");
             scanf("%d",&ch);
 
             arv = remover(arv,ch);
 
-            printf("\n\n\t------------- Atualizacao do Registros ------------- \n");
-            imprimir(arv);
             break;    
 
         default:

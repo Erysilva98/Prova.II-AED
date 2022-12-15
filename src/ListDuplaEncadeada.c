@@ -1,11 +1,12 @@
 /*
     -- Implementação de um Lista Duplamente Encadeada 
-    -- Metódos:
+    -- Métodos:
         Inserir no Inicio, 
         Inserir no Fim, 
         Inserir no Meio, 
         Inserir Ordenado, 
         Remover da Lista,
+        Método de Buscar,
         Imprimir.
     -- Autor: Erimilson Silva
     -- 09/12/2022

@@ -1,10 +1,10 @@
 /*
-    -- Implementação de um Lista Circular Duplamente Encadeada 
-    -- Metódos:
+   -- Implementação de um Lista Circular Duplamente Encadeada
+    -- Métodos:
         Iniciar Lista, 
         Adicionar Registro, 
         Remover Registro, 
-        Reinciar Lista, 
+        Resetar Lista, 
         Imprimir Lista.
     -- Autor: Erimilson Silva
     -- 12/12/2022

@@ -1,14 +1,14 @@
 /*
     -- Implementação de Árvore de Buscar Binária
-    -- Metódos:
-        Inserção,
-        Impressão Ordenada,
-        Altura da Àrvore,
+    -- Métodos:
+        Método de Inserção,
+        Método de Buscar,
+        Método de Remover,
+        Altura da Árvore,
         Número de NOs,
         Número de Folhas,
-        Remoção.
-    -- Autor: Erimilson Silva
-    -- 16/12/2022
+        Impressão Ordenada.
+    -- 14/12/2022
 */
 #include <stdio.h>
 #include <stdlib.h>

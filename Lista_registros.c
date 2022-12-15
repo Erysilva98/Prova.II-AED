@@ -1,13 +1,13 @@
 /*
-    -- Implementação de um Lista para o Refeitório
-    -- Metódos:
-        Iniciar Lista, 
-        Adicionar Registro, 
-        Remover Registro, 
-        Reinciar Lista, 
-        Imprimir Lista.
+    -- Struct de Registro em Lista Circular Duplamente Encadeda
+    --Métodos:
+        Método de Adicionar,
+        Impressão Ordenada,
+        Método de Remover,
+        Método de Buscar,        
+        Resetar Lista.
     -- Autor: Erimilson Silva
-    -- 16/12/2022
+    -- 15/12/2022
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -199,6 +199,25 @@ int removelista(Ifpe *refeit, int ch)
     return False;
 }
 
+No *buscar(Ifpe *refeit, Reg cad)
+{
+    No *aux = refeit->inicio;
+
+    if(aux)
+    {
+        do
+        {
+            if (aux->alunos.chave == cad.chave)
+            {
+                return aux;
+            }
+            aux = aux->proximo;
+            
+        } while (aux != refeit->inicio);
+    }
+    return NULL;
+}
+
 void resetaLista(Ifpe *refeit)
 {
     if(isVazia(refeit))
@@ -224,7 +243,7 @@ void resetaLista(Ifpe *refeit)
 int main()
 {
     int opc, ch;
-    Reg r1, r2, r3, r4, r5;
+    Reg pesqCh, r1, r2, r3, r4, r5;
     No fila_d12, fila_d13, fila_d14, fila_d15, fila_d16;
     No *pesquisar;
     Ifpe *refeit = iniciar();
@@ -245,9 +264,9 @@ int main()
         switch (opc)
         {
             case 1:
-                printf("\n\n\tRefeitorio do IFPE \n");
-                printf("\n-Adicionando Registros");
+                printf("\n\n\t------------- Adicionado Registros ------------- \n");
 
+                /* ---------------- */
                 fila_d12.dia = 12;
                 fila_d12.mes = 12;
                 fila_d12.ano = 2022;
@@ -259,7 +278,6 @@ int main()
                 r1.curso = ENG_SOFTWARE;
                 r1.periodo = 2;
                 
-
                 /* ---------------- */
                 fila_d13.dia = 13;
                 fila_d13.mes = 12;
@@ -273,7 +291,7 @@ int main()
                 r2.periodo = 4;              
                 
                 /* ---------------- */
-                fila_d14.dia = 13;
+                fila_d14.dia = 14;
                 fila_d14.mes = 12;
                 fila_d14.ano = 2022;
 
@@ -285,7 +303,7 @@ int main()
                 r3.periodo = 3;
                 
                 /* ---------------- */
-                fila_d15.dia = 13;
+                fila_d15.dia = 15;
                 fila_d15.mes = 12;
                 fila_d15.ano = 2022;
 
@@ -297,7 +315,7 @@ int main()
                 r4.periodo = 6;
 
                 /* ---------------- */
-                fila_d16.dia = 13;
+                fila_d16.dia = 16;
                 fila_d16.mes = 12;
                 fila_d16.ano = 2022;
 
@@ -318,28 +336,57 @@ int main()
                 break;
 
             case 2:
-                // Imprimir Registros 
+                printf("\n\n\t------------- Registros ------------- \n");
                 imprimir(refeit);
 
                 break;
             
             case 3:
-                // Remover Registro da Lista
-                printf("\n\n Registro a ser Removido - %d\n",r1.chave);
-                ch = 10;
+                printf("\n\n\t------------- Registros ------------- \n");
+                imprimir(refeit);
+
+                printf("\n\n\t------------- Removendo Registro ------------- \n");
+                printf("\n\tDigite a Chave do Registro a ser Removida: ");
+                scanf("%d",&ch);
+
                 removelista(refeit,ch);
 
                 break;
 
             case 4:
-                // Reiniciar Lista
+                // Buscando código de Regsitros 
+                printf("\n\n\t------------- Pesquisar por Registros na Lista ------------- \n");
+                printf("\n\tDigite o Chave do Registro: ");
+                scanf("%d",&pesqCh);
+
+                pesquisar = buscar(refeit,pesqCh);
+
+                if(pesquisar)
+                {
+                    printf("\n\t Resgitro Encontrado: %d",pesquisar->alunos.chave);
+                    printf("\n------------- Informacoes do Registro ------------- \n");
+                    printf("\nNome: %s",pesquisar->alunos.nome);
+                    printf("\nIdade: %2d",pesquisar->alunos.idade);
+                    printf("\nMatricula: %s",pesquisar->alunos.matricula);
+                    printf("\nCurso: %2d",pesquisar->alunos.curso);
+                    printf("\nPeriodo: %2d",pesquisar->alunos.periodo);  
+                }
+                else
+                {
+                    printf("\n\nNenhum Registro Encontrado! \n");
+                }
+
+                break;
+
+            case 5:
+                printf("\n\n\t------------- Deletando Registros ------------- \n");
                 resetaLista(refeit);
                 break;
 
             default:
                 if (opc != 0)
                 {
-                    printf("\n\t Opcao Invalida! \n");
+                    printf("\n\n\t------------- Opcao Invalida ------------- \n");
                 }  
         }
         
