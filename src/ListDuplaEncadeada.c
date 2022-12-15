@@ -20,7 +20,7 @@
 
 typedef int Tip_Chave;
 
-typedef struct no
+typedef struct no // Lista Encadeada
 {
     Tip_Chave valor;
     struct no *proximo;

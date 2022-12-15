@@ -28,7 +28,7 @@ typedef struct // Registros
     int periodo;
 }Reg;
 
-typedef struct no
+typedef struct no  // Árvore Binária
 {
     Reg cadastro;
     struct no *direita, *esquerda;    

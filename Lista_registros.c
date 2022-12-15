@@ -26,7 +26,7 @@
 
 typedef int Tipo_indentificador;
 
-typedef struct Registro
+typedef struct // Registro
 {
     Tipo_indentificador chave;
     char *nome;
@@ -47,7 +47,7 @@ typedef struct Fila_dia
     struct Fila_dia *anterior;
 }No;
 
-typedef struct Colec_filas
+typedef struct // Lista Encadeada
 {
     No filas;
     size_t qtd_filas;

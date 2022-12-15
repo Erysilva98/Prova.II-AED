@@ -19,7 +19,7 @@
 
 typedef int Tip_Chave;
 
-typedef struct Registro
+typedef struct // Registro
 {
     Tip_Chave chave;
     char *nome;
@@ -37,7 +37,7 @@ typedef struct no
     struct no *anterior;   
 }No;
 
-typedef struct Circ_lista
+typedef struct // Lista Circular
 {
     No *inicio;
     No *final;
